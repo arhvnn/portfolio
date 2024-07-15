@@ -1,14 +1,6 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@nextui-org/link";
-import clsx from "clsx";
-import {
-    Bricolage_Grotesque,
-    Montserrat,
-    Space_Grotesk,
-    Outfit,
-    Space_Mono,
-} from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 
 import { Providers } from "./providers";
 
@@ -16,43 +8,43 @@ import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/navbar";
 
 const bricolage_grotesque = Bricolage_Grotesque({
-    subsets: ["latin"],
-    weight: ["200", "400", "600", "700"],
+  subsets: ["latin"],
+  weight: ["200", "400", "600", "700"],
 });
 
 export const metadata: Metadata = {
-    title: {
-        default: siteConfig.name,
-        template: `%s - ${siteConfig.name}`,
-    },
-    description: siteConfig.description,
-    icons: {
-        icon: "/favicon.ico",
-    },
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export const viewport: Viewport = {
-    themeColor: [
-        { media: "(prefers-color-scheme: light)", color: "white" },
-        { media: "(prefers-color-scheme: dark)", color: "black" },
-    ],
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <html suppressHydrationWarning lang="en">
-            <head />
-            <body className={bricolage_grotesque.className + "w-screen"}>
-                <Providers>
-                    <Navbar />
-                    <>{children}</>
-                    {/* <footer className="w-full flex items-center justify-center"></footer> */}
-                </Providers>
-            </body>
-        </html>
-    );
+  return (
+    <html suppressHydrationWarning lang="en">
+      <head />
+      <body className={bricolage_grotesque.className + "w-screen"}>
+        <Providers>
+          <Navbar />
+          <>{children}</>
+          {/* <footer className="w-full flex items-center justify-center"></footer> */}
+        </Providers>
+      </body>
+    </html>
+  );
 }
