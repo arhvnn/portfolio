@@ -2,13 +2,21 @@
 
 import { RiArrowDownDoubleFill } from "react-icons/ri";
 import {
+    Button,
     Card,
     CardBody,
     CardFooter,
     CardHeader,
+    Chip,
     Divider,
     Image,
     Link,
+    Modal,
+    ModalBody,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    useDisclosure,
 } from "@nextui-org/react";
 import { useRef } from "react";
 
@@ -16,6 +24,7 @@ import Progress from "@/components/progress";
 
 export default function Home() {
     const mainRef = useRef<HTMLElement | null>(null);
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     return (
         <main ref={mainRef} className="max-w-screen overflow-hidden">
@@ -25,9 +34,9 @@ export default function Home() {
                     autoPlay
                     loop
                     muted
-                    className="absolute h-full w-full object-cover transform z-0"
+                    className="absolute h-full w-full object-cover transform z-10"
                 >
-                    <source src={`/glitch.mov`} type="video/mp4" />
+                    <source src={`/glitch.mp4`} type="video/mp4" />
                 </video>
 
                 <div
@@ -49,7 +58,7 @@ export default function Home() {
                     className="Arrow text-teal-500 z-30 text-7xl absolute top-[75vh] grid grid-cols-1 grid-rows-1 hover:cursor-pointer hover:scale-105 duration-250 ease-in-out hover:text-cyan-500"
                     role="presentation"
                     onClick={() => {
-                        const element = document.querySelector(".Education");
+                        const element = document.querySelector("#Education");
 
                         if (element) {
                             element.scrollIntoView({
@@ -63,162 +72,257 @@ export default function Home() {
                 </div>
             </section>
             {/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
-            <section className="Education h-[80vh] w-[100vw]" id="Education">
+            <section className="Education h-[80vh] w-screen" id="Education">
+                <div className="Circle absolute filter -z-10 bg-gradient-to-br from-[#1A2980] to-[#26D0CE] w-[600px]  top-[110vh] h-[300px] opacity-25 -right-24 rounded-full blur-3xl bg-opacity-70 " />
+                <div className="Circle absolute filter -z-10 bg-gradient-to-br from-[#cc2b5e] to-[#753a88] w-[600px]  top-[145vh] h-[300px]  rounded-full blur-3xl bg-opacity-70 opacity-25" />
+
                 <div>&#8203;</div>
                 <h1 className="w-[100vw] ml-16 md:ml-8 text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-l from-teal-400 to-cyan-500 bg-clip-text text-transparent mt-16">
                     Education
                 </h1>
-                <div className="flex justify-center items-center gap-5 h-[60vh] overflow-x-auto">
-                    <Card className="w-[375px] h-[40vh] min-w-[325px] ml-5">
-                        <CardHeader className="flex gap-3">
-                            <Image
-                                alt="nextui logo"
-                                height={40}
-                                radius="sm"
-                                src="/ensia.png"
-                                width={40}
-                            />
-                            <div className="flex flex-col">
-                                <p className="text-md">
-                                    The National Higher School of AI
-                                </p>
-                                <p className="text-small text-default-500">
-                                    September 2022 - July 2027
-                                </p>
-                            </div>
-                        </CardHeader>
-                        <Divider />
-                        <CardBody>
-                            <p className="font-bold">Featured Projects:</p>
-                            <ul className="mt-2 ml-4 list-disc">
-                                <li>
-                                    Electricity Management System
-                                    <Link
-                                        isExternal
-                                        showAnchorIcon
-                                        href="https://github.com/ziyad0081/DSA-ECMS"
-                                    ></Link>
-                                </li>
-                                <li>
-                                    Knowledge Academy
-                                    <Link
-                                        isExternal
-                                        showAnchorIcon
-                                        href="https://github.com/arhvnn/knowledge-academy"
-                                    ></Link>
-                                </li>
-                                <li>
-                                    Algiers Healthcare Network Optimisation
-                                    <Link
-                                        isExternal
-                                        showAnchorIcon
-                                        href="https://github.com/arhvnn/Algiers-HNO"
-                                    ></Link>
-                                </li>
-                            </ul>
-                        </CardBody>
-                        <Divider />
-                        <CardFooter>
-                            <Link
-                                isExternal
-                                showAnchorIcon
-                                href="https://github.com/nextui-org/nextui"
-                            >
-                                Visit source code on GitHub.
-                            </Link>
-                        </CardFooter>
-                    </Card>
-                    <Card className="w-[375px] h-[40vh] min-w-[325px]">
-                        <CardHeader className="flex gap-3">
-                            <Image
-                                alt="DataCamp Logo"
-                                height={40}
-                                radius="sm"
-                                src="/DataCamp.webp"
-                                width={40}
-                            />
-                            <div className="flex flex-col">
-                                <p className="text-md">DataCamp</p>
-                                <p className="text-small text-default-500">
-                                    Sep 2022 - Jul 2027
-                                </p>
-                            </div>
-                        </CardHeader>
-                        <Divider />
-                        <CardBody>
-                            <h2 className="font-bold">Featured Projects:</h2>
-                            <ul className="ml-4 mt-2 list-disc">
-                                <li>
-                                    Exploring NYC Public School Test Result
-                                    Scores
-                                    <Link
-                                        isExternal
-                                        showAnchorIcon
-                                        href="https://github.com/ziyad0081/DSA-ECMS"
-                                    ></Link>
-                                </li>
-                                <li>
-                                    Investigating Netflix Movies
-                                    <Link
-                                        isExternal
-                                        showAnchorIcon
-                                        href="https://github.com/ziyad0081/DSA-ECMS"
-                                    ></Link>
-                                </li>
-                                <li>
-                                    Visualizing the History of Nobel Prize
-                                    Winners
-                                    <Link
-                                        isExternal
-                                        showAnchorIcon
-                                        href="https://github.com/ziyad0081/DSA-ECMS"
-                                    ></Link>
-                                </li>
-                            </ul>
-                        </CardBody>
-                        <Divider />
-                        <CardFooter>
-                            <Link
-                                isExternal
-                                showAnchorIcon
-                                href="https://www.datacamp.com/portfolio/arhvnnn"
-                            >
-                                Visit my profile on DataCamp.
-                            </Link>
-                        </CardFooter>
-                    </Card>
-                    <Card className="w-[375px] h-[40vh] min-w-[325px] mr-5">
-                        <CardHeader className="flex gap-3">
-                            <Image
-                                alt="ENSIA Logo"
-                                height={40}
-                                radius="sm"
-                                src="/kaggle.png"
-                                width={40}
-                            />
-                            <div className="flex flex-col">
-                                <p className="text-md">Kaggle</p>
-                                <p className="text-small text-default-500">
-                                    Sep 2022 - Jul 2027
-                                </p>
-                            </div>
-                        </CardHeader>
-                        <Divider />
-                        <CardBody>
-                            <h2 className="font-bold">Featured Projects:</h2>
-                            <ul className="ml-4 mt-2 list-disc"></ul>
-                        </CardBody>
-                        <Divider />
-                        <CardFooter>
-                            <Link
-                                isExternal
-                                showAnchorIcon
-                                href="https://github.com/nextui-org/nextui"
-                            >
-                                Visit my profile on Kaggle.
-                            </Link>
-                        </CardFooter>
-                    </Card>
+                <div className="flex justify-center">
+                    <div className="flex items-center gap-5 h-[60vh] overflow-x-auto">
+                        <Card
+                            isPressable
+                            onPress={onOpen}
+                            className="w-[375px] h-[40vh] min-w-[325px] ml-5 shrink-0 hover:cursor-pointer"
+                        >
+                            <CardHeader className="flex gap-3">
+                                <Image
+                                    alt="nextui logo"
+                                    height={40}
+                                    radius="sm"
+                                    src="/ensia.png"
+                                    width={40}
+                                />
+                                <div className="flex flex-col">
+                                    <p className="text-md">
+                                        The National Higher School of AI
+                                    </p>
+                                    <p className="text-small text-default-500">
+                                        September 2022 - July 2027
+                                    </p>
+                                </div>
+                            </CardHeader>
+                            <Divider />
+                            <CardBody>
+                                <p className="font-bold">Featured Projects:</p>
+                                <ul className="mt-2 ml-4 list-disc">
+                                    <li>
+                                        Electricity Management System
+                                        <Link
+                                            isExternal
+                                            showAnchorIcon
+                                            href="https://github.com/ziyad0081/DSA-ECMS"
+                                        ></Link>
+                                    </li>
+                                    <li>
+                                        Knowledge Academy
+                                        <Link
+                                            isExternal
+                                            showAnchorIcon
+                                            href="https://github.com/arhvnn/knowledge-academy"
+                                        ></Link>
+                                    </li>
+                                    <li>
+                                        Algiers Healthcare Network Optimisation
+                                        <Link
+                                            isExternal
+                                            showAnchorIcon
+                                            href="https://github.com/arhvnn/Algiers-HNO"
+                                        ></Link>
+                                    </li>
+                                </ul>
+                            </CardBody>
+                            <Divider />
+                            <CardFooter>
+                                <Link
+                                    isExternal
+                                    showAnchorIcon
+                                    href="https://ensia.edu.dz/program"
+                                    className="bg-gradient-to-r from-teal-500 via-cyan-500 to-violet-500 bg-clip-text bg-transparent"
+                                >
+                                    Visit the school&apos;s program.
+                                </Link>
+                            </CardFooter>
+                        </Card>
+                        <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
+                            <ModalContent>
+                                {(onClose) => (
+                                    <>
+                                        <ModalHeader className="flex flex-col gap-1">
+                                            Modal Title
+                                        </ModalHeader>
+                                        <ModalBody></ModalBody>
+                                        <ModalFooter>
+                                            <Button
+                                                color="danger"
+                                                variant="light"
+                                                onPress={onClose}
+                                            >
+                                                Close
+                                            </Button>
+                                            <Button
+                                                color="primary"
+                                                onPress={onClose}
+                                            >
+                                                Action
+                                            </Button>
+                                        </ModalFooter>
+                                    </>
+                                )}
+                            </ModalContent>
+                        </Modal>
+                        <Card className="w-[375px] h-[40vh] min-w-[325px] shrink-0">
+                            <CardHeader className="flex gap-3">
+                                <Image
+                                    alt="DataCamp Logo"
+                                    height={40}
+                                    radius="sm"
+                                    src="/DataCamp.webp"
+                                    width={40}
+                                />
+                                <div className="flex flex-col">
+                                    <p className="text-md">DataCamp</p>
+                                    <p className="text-small text-default-500">
+                                        Sep 2022 - Jul 2027
+                                    </p>
+                                </div>
+                            </CardHeader>
+                            <Divider />
+                            <CardBody>
+                                <h2 className="font-bold">
+                                    Featured Projects:
+                                </h2>
+                                <ul className="ml-4 mt-2 list-disc">
+                                    <li>
+                                        Exploring NYC Public School Test Result
+                                        Scores
+                                        <Link
+                                            isExternal
+                                            showAnchorIcon
+                                            href="https://github.com/ziyad0081/DSA-ECMS"
+                                        ></Link>
+                                    </li>
+                                    <li>
+                                        Investigating Netflix Movies
+                                        <Link
+                                            isExternal
+                                            showAnchorIcon
+                                            href="https://github.com/ziyad0081/DSA-ECMS"
+                                        ></Link>
+                                    </li>
+                                    <li>
+                                        Visualizing the History of Nobel Prize
+                                        Winners
+                                        <Link
+                                            isExternal
+                                            showAnchorIcon
+                                            href="https://github.com/ziyad0081/DSA-ECMS"
+                                        ></Link>
+                                    </li>
+                                    <li>
+                                        Analysing Crime in Los Angeles
+                                        <Link
+                                            isExternal
+                                            showAnchorIcon
+                                            href="https://github.com/arhvnn/Analysing-Crime-in-Los-Angeles/blob/main/notebook.ipynb"
+                                        ></Link>
+                                    </li>
+                                </ul>
+                            </CardBody>
+                            <Divider />
+                            <CardFooter>
+                                <Link
+                                    isExternal
+                                    showAnchorIcon
+                                    href="https://www.datacamp.com/portfolio/arhvnnn"
+                                >
+                                    Visit my profile on DataCamp.
+                                </Link>
+                            </CardFooter>
+                        </Card>
+                        <Card className="w-[375px] h-[40vh] min-w-[325px] mr-5 shrink-0">
+                            <CardHeader className="flex gap-3">
+                                <Image
+                                    alt="ENSIA Logo"
+                                    height={40}
+                                    radius="sm"
+                                    src="/kaggle.png"
+                                    width={40}
+                                />
+                                <div className="flex flex-col">
+                                    <p className="text-md">Kaggle</p>
+                                    <p className="text-small text-default-500">
+                                        Sep 2022 - Jul 2027
+                                    </p>
+                                </div>
+                            </CardHeader>
+                            <Divider />
+                            <CardBody>
+                                <h2 className="font-bold">
+                                    Featured Competitions:
+                                </h2>
+                                <ul className="ml-4 mt-2 list-disc">
+                                    {" "}
+                                    <li>
+                                        Ai&apos;Fest - Help Djelloul grow his{" "}
+                                        <span className="text-nowrap">
+                                            business{" "}
+                                            <Chip
+                                                size="sm"
+                                                color="success"
+                                                className="h-min"
+                                            >
+                                                (1st)
+                                            </Chip>
+                                        </span>
+                                    </li>{" "}
+                                    <li>
+                                        Ai&apos;Fest - Discover The Space{" "}
+                                        <Chip
+                                            size="sm"
+                                            color="success"
+                                            className="h-min"
+                                        >
+                                            (1st)
+                                        </Chip>
+                                    </li>
+                                    <li>
+                                        Ai&apos;Fest - Smurfs Challenge{" "}
+                                        <Chip
+                                            size="sm"
+                                            color="primary"
+                                            className="h-min"
+                                        >
+                                            (3rd)
+                                        </Chip>
+                                    </li>
+                                    <li>
+                                        Ai&apos;Fest - Risky Patterns in IoT
+                                        Device Interactions{" "}
+                                        <Chip
+                                            size="sm"
+                                            color="primary"
+                                            className="h-min"
+                                        >
+                                            (3rd)
+                                        </Chip>
+                                    </li>
+                                </ul>
+                            </CardBody>
+                            <Divider />
+                            <CardFooter>
+                                <Link
+                                    isExternal
+                                    showAnchorIcon
+                                    href="https://github.com/nextui-org/nextui"
+                                >
+                                    Visit my profile on Kaggle.
+                                </Link>
+                            </CardFooter>
+                        </Card>
+                    </div>
                 </div>
             </section>
             <Divider className="my-4" />
@@ -247,7 +351,7 @@ export default function Home() {
             <Divider className="my-4" />
             {/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
             <section
-                className="Contact h-[50vh] max-h-[50vh] overflow-hidden w-[100vw]"
+                className="Contact h-[50vh] max-h-[50vh] overflow-hidden w-[100vw] bg-gradient-to-t"
                 id="Contact"
             >
                 <div>&#8203;</div>
@@ -301,7 +405,7 @@ export default function Home() {
                         <span className="border-l-2 px-1">Email</span>
                     </button>
                 </div>
-                <div className="Circle relative bg-teal-500 h-[30vh] z-20 top-[25vh] w-full bg-opacity-70 rounded-[100%] blur-[100px]" />
+                <div className="Circle relative bg-teal-500 h-[30vh] z-20 top-[25vh] w-[250vw] bg-opacity-70 blur-[100px]" />
             </section>
         </main>
     );

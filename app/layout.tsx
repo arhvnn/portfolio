@@ -42,9 +42,11 @@ export default function RootLayout({
                 <Providers
                     themeProps={{ attribute: "class", defaultTheme: "dark" }}
                 >
-                    <Navbar />
-                    <>{children}</>
-                    {/* <footer className="w-full flex items-center justify-center"></footer> */}
+                    <div className="max-w-screen overflow-hidden">
+                        <Navbar />
+                        <>{children}</>
+                        {/* <footer className="w-full flex items-center justify-center"></footer> */}
+                    </div>
                 </Providers>
             </body>
         </html>

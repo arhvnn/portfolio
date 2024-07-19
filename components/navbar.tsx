@@ -1,3 +1,4 @@
+"use client";
 import {
     Navbar as NextUINavbar,
     NavbarContent,
@@ -47,7 +48,10 @@ export const Navbar = () => {
     );
 
     return (
-        <NextUINavbar className="fixed max-w-screen" maxWidth="xl">
+        <NextUINavbar
+            className="fixed min-w-screen w-screen max-w-screen"
+            maxWidth="xl"
+        >
             <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
                 <NavbarBrand as="li" className="gap-3 max-w-fit">
                     <NextLink
@@ -59,20 +63,55 @@ export const Navbar = () => {
                     </NextLink>
                 </NavbarBrand>
                 <ul className="hidden lg:flex gap-4 justify-start ml-2">
-                    {siteConfig.navItems.map((item) => (
-                        <NavbarItem key={item.href}>
-                            <NextLink
-                                className={clsx(
-                                    linkStyles({ color: "foreground" }),
-                                    "data-[active=true]:text-primary data-[active=true]:font-medium"
-                                )}
-                                color="foreground"
-                                href={item.href}
-                            >
-                                {item.label}
-                            </NextLink>
-                        </NavbarItem>
-                    ))}
+                    <NavbarItem
+                        key="#Education"
+                        className="group transition duration-250 hover:cursor-pointer"
+                        onClick={() => {
+                            const element =
+                                document.querySelector("#Education");
+
+                            if (element) {
+                                element.scrollIntoView({
+                                    behavior: "smooth", // For smooth scrolling
+                                });
+                            }
+                        }}
+                    >
+                        Education
+                        <span className="block max-w-0 group-hover:max-w-full transition-all duration-250 rounded-full h-0.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-violet-500"></span>
+                    </NavbarItem>
+                    <NavbarItem
+                        key="#Skills"
+                        className="group transition duration-250 hover:cursor-pointer"
+                        onClick={() => {
+                            const element = document.querySelector("#Skills");
+
+                            if (element) {
+                                element.scrollIntoView({
+                                    behavior: "smooth", // For smooth scrolling
+                                });
+                            }
+                        }}
+                    >
+                        Skills
+                        <span className="block max-w-0 group-hover:max-w-full transition-all duration-250 rounded-full h-0.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-violet-500"></span>
+                    </NavbarItem>
+                    <NavbarItem
+                        key="#Projects"
+                        className="group transition duration-250 hover:cursor-pointer"
+                        onClick={() => {
+                            const element = document.querySelector("#Projects");
+
+                            if (element) {
+                                element.scrollIntoView({
+                                    behavior: "smooth", // For smooth scrolling
+                                });
+                            }
+                        }}
+                    >
+                        Projects
+                        <span className="block max-w-0 group-hover:max-w-full transition-all duration-250 rounded-full h-0.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-violet-500"></span>
+                    </NavbarItem>
                 </ul>
             </NavbarContent>
 
