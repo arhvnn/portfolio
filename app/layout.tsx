@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const bricolage_grotesque = Bricolage_Grotesque({
     subsets: ["latin"],
@@ -42,10 +43,10 @@ export default function RootLayout({
                 <Providers
                     themeProps={{ attribute: "class", defaultTheme: "dark" }}
                 >
-                    <div className="max-w-screen overflow-hidden">
+                    <div>
                         <Navbar />
-                        <>{children}</>
-                        {/* <footer className="w-full flex items-center justify-center"></footer> */}
+                        {children}
+                        <Footer />
                     </div>
                 </Providers>
             </body>

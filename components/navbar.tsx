@@ -12,46 +12,18 @@ import { Button } from "@nextui-org/button";
 import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
 import { Input } from "@nextui-org/input";
-import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
-import clsx from "clsx";
+import React, { useState } from "react";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import {
-    GithubIcon,
-    HeartFilledIcon,
-    SearchIcon,
-    Logo,
-} from "@/components/icons";
+import { GithubIcon, SearchIcon, Logo } from "@/components/icons";
 
 export const Navbar = () => {
-    const searchInput = (
-        <Input
-            aria-label="Search"
-            classNames={{
-                inputWrapper: "bg-default-100",
-                input: "text-sm",
-            }}
-            endContent={
-                <Kbd className="hidden lg:inline-block" keys={["command"]}>
-                    K
-                </Kbd>
-            }
-            labelPlacement="outside"
-            placeholder="Search..."
-            startContent={
-                <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-            }
-            type="search"
-        />
-    );
+    const [menu, setMenu] = useState(false);
 
     return (
-        <NextUINavbar
-            className="fixed min-w-screen w-screen max-w-screen"
-            maxWidth="xl"
-        >
+        <NextUINavbar className="fixed max-w-screen" isMenuOpen={menu}>
             <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
                 <NavbarBrand as="li" className="gap-3 max-w-fit">
                     <NextLink
@@ -78,7 +50,7 @@ export const Navbar = () => {
                         }}
                     >
                         Education
-                        <span className="block max-w-0 group-hover:max-w-full transition-all duration-250 rounded-full h-0.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-violet-500"></span>
+                        <span className="block max-w-0 group-hover:max-w-full transition-all duration-250 rounded-full h-0.5 bg-gradient-to-r to-teal-500 via-cyan-500 from-violet-500"></span>
                     </NavbarItem>
                     <NavbarItem
                         key="#Skills"
@@ -94,7 +66,7 @@ export const Navbar = () => {
                         }}
                     >
                         Skills
-                        <span className="block max-w-0 group-hover:max-w-full transition-all duration-250 rounded-full h-0.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-violet-500"></span>
+                        <span className="block max-w-0 group-hover:max-w-full transition-all duration-250 rounded-full h-0.5 bg-gradient-to-r to-teal-500 via-cyan-500 from-violet-500"></span>
                     </NavbarItem>
                     <NavbarItem
                         key="#Projects"
@@ -110,7 +82,7 @@ export const Navbar = () => {
                         }}
                     >
                         Projects
-                        <span className="block max-w-0 group-hover:max-w-full transition-all duration-250 rounded-full h-0.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-violet-500"></span>
+                        <span className="block max-w-0 group-hover:max-w-full transition-all duration-250 rounded-full h-0.5 bg-gradient-to-r to-teal-500 via-cyan-500 from-violet-500"></span>
                     </NavbarItem>
                 </ul>
             </NavbarContent>
@@ -127,12 +99,17 @@ export const Navbar = () => {
                         as={Link}
                         className="text-sm font-normal"
                         color="primary"
-                        href="/"
                         isExternal
-                        startContent={
-                            <HeartFilledIcon className="text-danger" />
-                        }
                         variant="solid"
+                        onClick={() => {
+                            const element = document.querySelector("#Contact");
+
+                            if (element) {
+                                element.scrollIntoView({
+                                    behavior: "smooth", // For smooth scrolling
+                                });
+                            }
+                        }}
                     >
                         Contact
                     </Button>
@@ -148,28 +125,28 @@ export const Navbar = () => {
                     <GithubIcon className="text-default-500" />
                 </Link>
                 <ThemeSwitch />
-                <NavbarMenuToggle />
+                <NavbarMenuToggle onClick={() => setMenu(!menu)} />
             </NavbarContent>
 
             <NavbarMenu>
-                {searchInput}
                 <div className="mx-4 mt-2 flex flex-col gap-2">
                     {siteConfig.navMenuItems.map((item, index) => (
-                        <NavbarMenuItem key={`${item}-${index}`}>
-                            <Link
-                                color={
-                                    index === 2
-                                        ? "primary"
-                                        : index ===
-                                            siteConfig.navMenuItems.length - 1
-                                          ? "danger"
-                                          : "foreground"
+                        <NavbarMenuItem
+                            key={item.label}
+                            className="group transition duration-250 hover:cursor-pointer"
+                            onClick={() => {
+                                const element = document.querySelector(
+                                    item.href
+                                );
+                                if (element) {
+                                    element.scrollIntoView({
+                                        behavior: "smooth", // For smooth scrolling
+                                    });
                                 }
-                                href="#"
-                                size="lg"
-                            >
-                                {item.label}
-                            </Link>
+                                setMenu(false);
+                            }}
+                        >
+                            {item.label}
                         </NavbarMenuItem>
                     ))}
                 </div>
