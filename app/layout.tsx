@@ -6,7 +6,6 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/navbar";
-import Footer from "@/components/footer";
 
 const bricolage_grotesque = Bricolage_Grotesque({
     subsets: ["latin"],
@@ -44,9 +43,8 @@ export default function RootLayout({
                     themeProps={{ attribute: "class", defaultTheme: "dark" }}
                 >
                     <div>
-                        <Navbar />
+                        <Navbar/>
                         {children}
-                        <Footer />
                     </div>
                 </Providers>
             </body>

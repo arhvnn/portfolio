@@ -14,9 +14,26 @@ import {
     ModalHeader,
     useDisclosure,
 } from "@nextui-org/react";
+import { useState } from "react";
+
+interface CardInfo {
+    title: string;
+    subtitle: string;
+    image: string;
+    featured_title: string;
+    featured_list: {
+        title: string;
+        link: string;
+        image: string;
+        description: string;
+    }[];
+    link_title: string;
+    link: string;
+}
 
 export default function Edu() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [selectedCard, setSelectedCard] = useState<CardInfo | null>(null); // Define type for selected card
     const cards_info = [
         {
             title: "Data Science and Machine Learning",
@@ -26,14 +43,20 @@ export default function Edu() {
             featured_list: [
                 {
                     title: "Electricity Management System",
+                    description: "", // Corrected from discription to description
+                    image: "",
                     link: "https://github.com/ziyad0081/DSA-ECMS",
                 },
                 {
                     title: "Rouh El Quran Academy",
+                    description: "", // Corrected from discription to description
+                    image: "",
                     link: "https://github.com/arhvnn/rouh-el-quran-front-end",
                 },
                 {
                     title: "Healthcare Network Optimisation",
+                    description: "", // Corrected from discription to description
+                    image: "",
                     link: "https://github.com/arhvnn/Algiers-HNO",
                 },
             ],
@@ -47,12 +70,23 @@ export default function Edu() {
             featured_title: "Featured Projects",
             featured_list: [
                 {
-                    title: "Exploring NYC Public School Test Result Scores",
+                    title: "Exploring Airbnb Market Trends in NYC",
+                    description:
+                        "In this project, I analyzed Airbnb listings in New York City to uncover market trends...",
+                    image: "room_type_count_plot.png",
                     link: "",
                 },
-                { title: "Investigating Netflix Movies", link: "" },
+                {
+                    title: "Investigating Netflix Movies",
+                    description:
+                        "Analyzed Netflix movie data to determine if the average duration of movies is decreasing...",
+                    image: "movie_duration_by_year.png",
+                    link: "",
+                },
                 {
                     title: "Visualizing the History of Nobel Prize Winners",
+                    description: "", // Corrected from discription to description
+                    image: "",
                     link: "",
                 },
                 { title: "Analysing Crime in Los Angeles", link: "" },
@@ -60,20 +94,6 @@ export default function Edu() {
             link_title: "Visit my profile on DataCamp",
             link: "https://www.datacamp.com/portfolio/arhvnnn",
         },
-        // {
-        //     title: "Kaggle",
-        //     subtitle: "September 2022 - July 2027",
-        //     image: "kaggle.png",
-        //     featured_title: "Featured Projects",
-        //     featured_list: [
-        //         {
-        //             title: 'Ai&apos;Fest - Help Djelloul grow his <span className="text-nowrap">business <Chip size="sm" color="success" className="h-min">(1st)</Chip></span>',
-        //             link: "",
-        //         },
-        //     ],
-        //     link_title: "Visit my profile on Kaggle",
-        //     link: "https://ensia.edu.dz",
-        // },
     ];
     return (
         <section className="Education h-[80vh] w-[100vw]" id="Education">
@@ -85,18 +105,21 @@ export default function Edu() {
                 Education
             </h1>
             <div className="flex justify-center">
-                <div className="flex items-center gap-5 h-[60vh] overflow-x-auto overflow-hidden max-w-[100vw]">
+                <div className="flex items-center md:gap-12 h-[60vh] overflow-x-auto">
                     {cards_info.map((card, index) => (
                         <>
                             <Card
                                 key={index}
                                 isPressable
-                                onPress={onOpen}
-                                className="w-[375px] h-[40vh] min-w-[325px] ml-5 shrink-0 hover:cursor-pointer"
+                                onPress={() => {
+                                    onOpen();
+                                    setSelectedCard(card); // Set selected card
+                                }}
+                                className="w-[375px] h-[40vh] min-w-[325px] shrink-0 hover:cursor-pointer mx-4"
                             >
                                 <CardHeader className="flex gap-3">
                                     <Image
-                                        alt="nextui logo"
+                                        alt=""
                                         height={40}
                                         radius="sm"
                                         src={"/" + card.image}
@@ -142,6 +165,7 @@ export default function Edu() {
                                 </CardFooter>
                             </Card>
                             <Modal
+                                className="max-h-[80vh] overflow-auto"
                                 backdrop="blur"
                                 isOpen={isOpen}
                                 onOpenChange={onOpenChange}
@@ -149,11 +173,78 @@ export default function Edu() {
                                 <ModalContent>
                                     {(onClose) => (
                                         <>
-                                            <ModalHeader className="flex flex-col gap-1">
-                                                Modal Title
+                                            <ModalHeader className="flex gap-3 items-center">
+                                                <Image
+                                                    alt=""
+                                                    height={40}
+                                                    radius="sm"
+                                                    src={
+                                                        "/" +
+                                                        selectedCard?.image
+                                                    }
+                                                    width={40}
+                                                />
+                                                <div className="flex flex-col items-start">
+                                                    <p className="text-md">
+                                                        {selectedCard?.title}
+                                                    </p>
+                                                    <p className="text-small text-default-500">
+                                                        {selectedCard?.subtitle}
+                                                    </p>
+                                                </div>
                                             </ModalHeader>
                                             <ModalBody>
-                                                COULD IT BE THIS
+                                                {selectedCard?.featured_list.map(
+                                                    (featured, index) => (
+                                                        <Card
+                                                            key={index}
+                                                            className="w-[375px] h-[40vh] min-w-[325px] shrink-0 hover:cursor-pointer mx-4"
+                                                        >
+                                                            <CardHeader className="flex gap-3">
+                                                                <div className="flex flex-col items-start">
+                                                                    <p className="text-md">
+                                                                        {
+                                                                            featured.title
+                                                                        }
+                                                                    </p>
+                                                                    <p className="text-small text-default-500">
+                                                                        {
+                                                                            // card.subtitle
+                                                                        }
+                                                                    </p>
+                                                                </div>
+                                                            </CardHeader>
+                                                            <Divider />
+                                                            <CardBody>
+                                                                <Image
+                                                                    alt=""
+                                                                    radius="sm"
+                                                                    src={
+                                                                        "/" +
+                                                                        featured.image
+                                                                    }
+                                                                    // height={40}
+                                                                    // width={40}
+                                                                />
+                                                            </CardBody>
+                                                            <Divider />
+                                                            {/* <CardFooter>
+                                                                <Link
+                                                                    isExternal
+                                                                    showAnchorIcon
+                                                                    href={
+                                                                        card.link
+                                                                    }
+                                                                    className="bg-gradient-to-r from-teal-500 via-cyan-500 to-violet-500 bg-clip-text bg-transparent"
+                                                                >
+                                                                    {
+                                                                        card.link_title
+                                                                    }
+                                                                </Link>
+                                                            </CardFooter> */}
+                                                        </Card>
+                                                    )
+                                                )}
                                             </ModalBody>
                                             <ModalFooter>
                                                 <Button
@@ -162,12 +253,6 @@ export default function Edu() {
                                                     onPress={onClose}
                                                 >
                                                     Close
-                                                </Button>
-                                                <Button
-                                                    color="primary"
-                                                    onPress={onClose}
-                                                >
-                                                    Action
                                                 </Button>
                                             </ModalFooter>
                                         </>
